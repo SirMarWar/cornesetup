@@ -54,4 +54,4 @@
                 };
         };
 };
-&led_strip { chain-length = <54>; };
+&led_strip { chain-length = <27>; };
