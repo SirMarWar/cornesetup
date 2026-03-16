@@ -26,6 +26,24 @@
         compatible = "zmk,battery-nrf-vddh";
     };
 };
+&pro_micro_i2c {
+    status = "okay";
+
+    oled: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
+        reg = <0x3c>;
+        width = <128>;
+        height = <32>;
+        segment-remap;   // Estos dos son clave para 
+        page-remap;      // limpiar la imagen "sucia"
+        display-offset = <0>;
+        multiplex-ratio = <31>;
+        segment-offset = <0>;
+        page-offset = <0>;
+        prechargep = <0x22>;
+    };
+};
+
 &pinctrl {
     spi3_default: spi3_default {
         group1 {
