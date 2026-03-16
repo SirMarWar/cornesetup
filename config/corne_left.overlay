@@ -34,8 +34,6 @@
         reg = <0x3c>;
         width = <128>;
         height = <32>;
-        segment-remap;   // Estos dos son clave para 
-        page-remap;      // limpiar la imagen "sucia"
         display-offset = <0>;
         multiplex-ratio = <31>;
         segment-offset = <0>;
