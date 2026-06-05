@@ -10,6 +10,41 @@
 #include <dt-bindings/zmk/rgb.h>
 
 / {
+    // Hold = capa momentánea (mo). Doble tap = capa fija (tog). Equivalente a QMK TT().
+    behaviors {
+        td_tog_2: tap_dance_toggle_2 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <400>;
+            bindings = <&none>, <&tog 2>;
+        };
+
+        td_tog_3: tap_dance_toggle_3 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <400>;
+            bindings = <&none>, <&tog 3>;
+        };
+
+        ht_tt_2: hold_tap_toggle_2 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <350>;
+            bindings = <&mo>, <&td_tog_2>;
+        };
+
+        ht_tt_3: hold_tap_toggle_3 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <350>;
+            bindings = <&mo>, <&td_tog_3>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -18,7 +53,7 @@
 &kp ESC     &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O    &kp P     &kp BSPC
 &kp TAB     &kp A  &kp S  &kp D  &kp F  &kp G        &kp H  &kp J  &kp K     &kp L    &kp SEMI  &kp SQT
 &kp LSHFT   &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT  &kp FSLH  &kp RCTRL
-                              &kp LGUI  &mo 1  &kp SPACE    &kp RET  &sl 2  &kp RALT
+                              &kp LGUI  &mo 1  &kp SPACE    &kp RET  &ht_tt_2 2 0  &kp RALT
             >;
         };
 
@@ -27,7 +62,7 @@
 &kp ESC     &kp AT   &kp BSLH  &kp DLLR  &kp HASH  &kp GRAVE    &kp KP_SLASH  &kp N7  &kp N8  &kp N9     &kp MINUS  &kp BSPC
 &kp CAPS    &none    &kp CARET &kp AMPS  &kp LPAR  &kp RPAR     &kp KP_MULTIPLY &kp N4  &kp N5  &kp N6     &kp EQUAL  &kp KP_NUM
 &kp LSHFT   &none    &kp EXCL  &kp FSLH  &kp LBRC  &kp RBRC     &kp KP_DOT    &kp N1  &kp N2  &kp N3     &kp PRCNT  &none
-                                        &kp LGUI  &trans  &kp SPACE    &kp RET  &sl 3  &kp N0
+                                        &kp LGUI  &trans  &kp SPACE    &kp RET  &ht_tt_3 3 0  &kp N0
             >;
         };
 
@@ -36,7 +71,7 @@
 &kp F1   &kp F2   &kp F3   &kp F4   &kp F5   &kp F6      &none  &none  &none  &none  &kp PSCRN  &kp DEL
 &kp F7   &kp F8   &kp F9   &kp F10  &kp F11  &kp F12     &none  &kp HOME &kp UP &kp END  &none  &kp PAUSE_BREAK
 &kp LSHFT &none   &none    &none    &none    &none       &none  &kp LEFT &kp DOWN &kp RIGHT &none  &none
-                              &kp LGUI  &sl 3  &kp SPACE    &kp RET  &trans  &kp RALT
+                              &kp LGUI  &ht_tt_3 3 0  &kp SPACE    &kp RET  &trans  &kp RALT
             >;
         };
 
